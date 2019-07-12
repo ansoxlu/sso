@@ -1,0 +1,29 @@
+server:
+  port: 8760
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: @profile@
+
+zuul:
+  add-proxy-headers: true
+  sensitive-headers:
+  routes:
+    oauth:
+      stripPrefix: false
+      path: /oauth/**
+      serviceId: uac-provider
+    uaa:
+      path: /uac/**
+      sensitiveHeaders:
+      serviceId: uac-provider
+    dmc:
+      path: /dmc/**
+      sensitiveHeaders:
+      serviceId: dmc-provider
+
+logging:
+  level:
+    root: debug

@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'sso'
+
+include 'eureka'
+include 'uac'
+include 'dmc'
+include 'gateway'
+
+//修改子级build.gradle文件名与模块名一致. WARNING:以上导入模块有效.
+rootProject.children.each {project ->
+    project.buildFileName = "${project.name}.gradle"
+    project.children.each {pro ->
+        pro.buildFileName = "${pro.name}.gradle"
+    }
+}
