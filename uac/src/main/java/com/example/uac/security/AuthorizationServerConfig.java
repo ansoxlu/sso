@@ -11,11 +11,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 
+/**
+ * oauth server config
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -25,6 +29,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private RedisConnectionFactory redisConnectionFactory;
     @Resource
     private UserDetailsService userDetailsService;
+    @Resource
+    private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -38,14 +44,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients();
+        security.allowFormAuthenticationForClients(); // 表单登陆
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore())
-                .userDetailsService(userDetailsService)
-                .authenticationManager(authenticationManager);
+        endpoints
+                .tokenStore(tokenStore()) // require
+                .userDetailsService(userDetailsService) // require security.oauth2.resource.user-info-uri
+                .authenticationManager(authenticationManager) // require
+                .exceptionTranslator(webResponseExceptionTranslator); // 异常结果信息处理
 
     }
 
@@ -53,4 +61,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public TokenStore tokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
+
 }

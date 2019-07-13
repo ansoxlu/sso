@@ -25,7 +25,7 @@ public class TestController {
     }
 
     @GetMapping("/getPrinciple")
-    @PreAuthorize("hasAuthority('LOGIN')")
+    @PreAuthorize("hasAuthority('ROLE_LOGIN')")
     public OAuth2Authentication getPrinciple(OAuth2Authentication oAuth2Authentication, Principal principal, Authentication authentication) {
         log.info(oAuth2Authentication.getUserAuthentication().getAuthorities().toString());
         log.info(oAuth2Authentication.toString());
