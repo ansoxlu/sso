@@ -1,5 +1,6 @@
 package com.example.uac.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -15,21 +16,19 @@ import org.springframework.security.oauth2.provider.error.WebResponseExceptionTr
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
-import javax.annotation.Resource;
-
 /**
  * oauth server config
  */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    @Resource
+    @Autowired
     private AuthenticationManager authenticationManager;
-    @Resource
+    @Autowired
     private RedisConnectionFactory redisConnectionFactory;
-    @Resource
+    @Autowired
     private UserDetailsService userDetailsService;
-    @Resource
+    @Autowired
     private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
     @Override
@@ -54,6 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .userDetailsService(userDetailsService) // require security.oauth2.resource.user-info-uri
                 .authenticationManager(authenticationManager) // require
                 .exceptionTranslator(webResponseExceptionTranslator); // 异常结果信息处理
+
 
     }
 

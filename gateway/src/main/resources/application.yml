@@ -14,15 +14,15 @@ zuul:
     oauth:
       stripPrefix: false
       path: /oauth/**
-      serviceId: uac-provider
+      serviceId: uac-handle
     uaa:
       path: /uac/**
       sensitiveHeaders:
-      serviceId: uac-provider
+      serviceId: uac-handle
     dmc:
       path: /dmc/**
       sensitiveHeaders:
-      serviceId: dmc-provider
+      serviceId: dmc-handle
 
 logging:
   level:

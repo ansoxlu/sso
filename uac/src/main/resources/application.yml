@@ -3,9 +3,9 @@ server:
   use-forward-headers: true
 spring:
   application:
-    name: uac-provider
+    name: uac-handle
   profiles:
     active: @profile@
 
   redis:
-    host: 45.63.86.221
+    host: 45.77.191.230

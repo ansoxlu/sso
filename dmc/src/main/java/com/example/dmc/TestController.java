@@ -19,13 +19,13 @@ public class TestController {
     }
 
     @GetMapping("/order/{id}")
-    @PreAuthorize("hasAuthority('LOGIN')")
+    @PreAuthorize("hasRole('LOGIN')")
     public String getOrder(@PathVariable String id) {
         return "order id : " + id;
     }
 
     @GetMapping("/getPrinciple")
-    @PreAuthorize("hasAuthority('ROLE_LOGIN')")
+    @PreAuthorize("hasRole('ROOT')")
     public OAuth2Authentication getPrinciple(OAuth2Authentication oAuth2Authentication, Principal principal, Authentication authentication) {
         log.info(oAuth2Authentication.getUserAuthentication().getAuthorities().toString());
         log.info(oAuth2Authentication.toString());

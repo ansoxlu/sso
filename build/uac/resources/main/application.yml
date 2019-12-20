@@ -1,0 +1,11 @@
+server:
+  port: 8762
+  use-forward-headers: true
+spring:
+  application:
+    name: uac-handle
+  profiles:
+    active: dev
+
+  redis:
+    host: 45.77.191.230

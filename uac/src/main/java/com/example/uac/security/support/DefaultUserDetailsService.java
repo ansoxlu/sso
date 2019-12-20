@@ -1,6 +1,6 @@
 package com.example.uac.security.support;
 
-import com.example.uac.security.UserPrincipal;
+import com.example.uac.security.model.UserPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +17,12 @@ public class DefaultUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (!"test".equals(username)) throw new UsernameNotFoundException(username + "is null");
         String encode = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
-        return new UserPrincipal("test", encode, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_LOGIN")));
+        return new UserPrincipal("test", encode, true,
+                Arrays.asList(
+                        new SimpleGrantedAuthority("ROLE_LOGIN"),
+                        new SimpleGrantedAuthority("ROLE_ROOT"),
+                        new SimpleGrantedAuthority("ROLE_ADMIN")
+                ));
 
     }
 }

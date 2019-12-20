@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sso.dmc.main" target="1.8" />
+      <module name="sso.dmc.test" target="1.8" />
+      <module name="sso.eureka.main" target="1.8" />
+      <module name="sso.eureka.test" target="1.8" />
+      <module name="sso.gateway.main" target="1.8" />
+      <module name="sso.gateway.test" target="1.8" />
+      <module name="sso.main" target="1.8" />
+      <module name="sso.test" target="1.8" />
+      <module name="sso.uac.main" target="1.8" />
+      <module name="sso.uac.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
